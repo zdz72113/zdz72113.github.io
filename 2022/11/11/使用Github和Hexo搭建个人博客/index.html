@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.2">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="相比于使用第三方博客网站不够自由，限制比较多。自己购买域名和服务器搭建博客购买成本高，需要定期维护。使用Github page平台托管我们的网站结合Hexo高效的本地管理功能，可以让笔者安心写作，无须担心文章审核或投入精力在网站维护上。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="使用Github和Hexo搭建个人博客">
+<meta property="og:url" content="http://example.com/2022/11/11/%E4%BD%BF%E7%94%A8Github%E5%92%8CHexo%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/index.html">
+<meta property="og:site_name" content="车骑的个人博客">
+<meta property="og:description" content="相比于使用第三方博客网站不够自由，限制比较多。自己购买域名和服务器搭建博客购买成本高，需要定期维护。使用Github page平台托管我们的网站结合Hexo高效的本地管理功能，可以让笔者安心写作，无须担心文章审核或投入精力在网站维护上。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/2022/11/11/%E4%BD%BF%E7%94%A8Github%E5%92%8CHexo%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/1.png">
+<meta property="article:published_time" content="2022-11-11T01:16:58.000Z">
+<meta property="article:modified_time" content="2022-11-11T03:15:08.340Z">
+<meta property="article:author" content="cheqi">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/2022/11/11/%E4%BD%BF%E7%94%A8Github%E5%92%8CHexo%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/1.png">
+
+<link rel="canonical" href="http://example.com/2022/11/11/%E4%BD%BF%E7%94%A8Github%E5%92%8CHexo%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>使用Github和Hexo搭建个人博客 | 车骑的个人博客</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">车骑的个人博客</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/11/11/%E4%BD%BF%E7%94%A8Github%E5%92%8CHexo%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="cheqi">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="车骑的个人博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          使用Github和Hexo搭建个人博客
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2022-11-11 09:16:58" itemprop="dateCreated datePublished" datetime="2022-11-11T09:16:58+08:00">2022-11-11</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%95%99%E7%A8%8B/" itemprop="url" rel="index"><span itemprop="name">教程</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>相比于使用第三方博客网站不够自由，限制比较多。自己购买域名和服务器搭建博客购买成本高，需要定期维护。使用Github page平台托管我们的网站结合Hexo高效的本地管理功能，可以让笔者安心写作，无须担心文章审核或投入精力在网站维护上。</p>
+<span id="more"></span>
+
+<h1 id="搭建"><a href="#搭建" class="headerlink" title="搭建"></a>搭建</h1><h2 id="安装Git"><a href="#安装Git" class="headerlink" title="安装Git"></a>安装Git</h2><p>Git是目前世界上最通用的分布式版本控制系统，可以有效的管理程序源代码及文档等。<br>Windows下请到<a target="_blank" rel="noopener" href="https://git-scm.com/download/win">官网</a>下载并安装。</p>
+<h2 id="安装Node-js"><a href="#安装Node-js" class="headerlink" title="安装Node.js"></a>安装Node.js</h2><p>Hexo是基于node.js编写的，所以需要安装一下node.js和里面的npm工具。<br>Windows下请到<a target="_blank" rel="noopener" href="http://nodejs.cn/download/">官网</a>下载并安装。</p>
+<p>在国内使用npm工具如果没有梯子的话，需要配置国内镜像进行加速。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm config set registry https://registry.npm.taobao.org</span><br></pre></td></tr></table></figure>
+
+<h2 id="安装Hexo"><a href="#安装Hexo" class="headerlink" title="安装Hexo"></a>安装Hexo</h2><p>使用命令<code>npm install -g hexo-cli</code>安装Hexo，完成后通过<code>hexo -v</code>验证是否安装成功。</p>
+<ol>
+<li>使用<code>hexo init MyBlog</code>初始化文件夹，把MyBlog替换为自己想定义的文件夹名称。</li>
+<li>进入文件夹并安装组件。 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cd MyBlog      //进入这个MyBlog文件夹</span><br><span class="line">npm install</span><br></pre></td></tr></table></figure>
+ 目录下有：<ul>
+<li>node_modules: 依赖包</li>
+<li>public：存放生成的页面</li>
+<li>scaffolds：生成文章的一些模板</li>
+<li>source：用来存放你的文章</li>
+<li>themes：主题**</li>
+<li>_config.yml: 博客的配置文件**</li>
+</ul>
+</li>
+<li>使用<code>hexo g</code>生成静态网页，然后输入<code>hexo s</code>打开本地服务器。然后浏览器打开<a target="_blank" rel="noopener" href="http://localhost:4000/">http://localhost:4000/</a>，就可以看到我们的博客啦，效果如下：<br><img src="/2022/11/11/%E4%BD%BF%E7%94%A8Github%E5%92%8CHexo%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/1.png" alt="Hexo效果图"><br>按ctrl+c关闭本地服务器。</li>
+</ol>
+<h2 id="创建Github-Page"><a href="#创建Github-Page" class="headerlink" title="创建Github Page"></a>创建Github Page</h2><p>打开<a target="_blank" rel="noopener" href="https://github.com/">https://github.com/</a>，新建一个项目仓库New repository。<br>要创建一个和你<strong>用户名相同</strong>的仓库，后面加 .github.io，只有这样，将来要部署到GitHub page的时候，才会被识别，也就是<a href="http://xxxx.github.io，其中xxx就是你注册GitHub的用户名。例如我的：[http://zdz72113.github.io](http://zdz72113.github.io)">http://xxxx.github.io，其中xxx就是你注册GitHub的用户名。例如我的：[http://zdz72113.github.io](http://zdz72113.github.io)</a></p>
+<h2 id="关联Hexo和GitHub"><a href="#关联Hexo和GitHub" class="headerlink" title="关联Hexo和GitHub"></a>关联Hexo和GitHub</h2><ol>
+<li>使用命令<code>npm install hexo-deployer-git --save</code>安装插件hexo-deployer-git</li>
+<li>修改博客根目录下的_config.yml文件 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">deploy:</span><br><span class="line">  type: git</span><br><span class="line">  repository: https://github.com/zdz72113/zdz72113.github.io</span><br><span class="line">  branch: main</span><br></pre></td></tr></table></figure></li>
+<li>发布文章到github <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">hexo clean //清除了你之前生成的东西</span><br><span class="line">hexo g //生成静态文章</span><br><span class="line">hexo d //发布文章到github</span><br></pre></td></tr></table></figure>
+ 部署完成后，等待几分钟就可以在<a target="_blank" rel="noopener" href="http://yourname.github.io/">http://yourname.github.io</a> 上看到博客了。</li>
+</ol>
+<h1 id="定制"><a href="#定制" class="headerlink" title="定制"></a>定制</h1><p><a target="_blank" rel="noopener" href="https://github.com/theme-next/hexo-theme-next">hexo-theme-next</a>是应用比较多的Hexo主题，主题的安装非常简单。</p>
+<ol>
+<li>进入博客文件夹主目录执行<code>git clone https://github.com/theme-next/hexo-theme-next themes/next</code>下载主题，也可以手动下载后复制到themes文件夹下。</li>
+<li>启用主题：打开_config.yml文件找到theme配置项并修改为next。 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">theme: next</span><br></pre></td></tr></table></figure></li>
+<li>next主题里面的具体配置请到\themes\next_config.yml文件里面做对应更改，比如定制外观，菜单，侧边框，开启打赏等，具体可参考<a target="_blank" rel="noopener" href="http://theme-next.iissnan.com/getting-started.html">http://theme-next.iissnan.com/getting-started.html</a></li>
+</ol>
+<h1 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h1><ul>
+<li>新建文章：<code>hexo new post &quot;article title&quot;</code></li>
+<li>生成静态网页：<code>hexo g</code></li>
+<li>本地预览：<code>hexo s</code></li>
+<li>发布到Github：<code>hexo d</code></li>
+<li>使用本地图片编辑带图文章需安装<a target="_blank" rel="noopener" href="https://github.com/uinika/hexo-asset-image-for-hexo5">hexo-asset-image-for-hexo5</a></li>
+</ul>
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><ul>
+<li><a target="_blank" rel="noopener" href="https://hexo.io/zh-cn/">Hexo</a></li>
+<li><a target="_blank" rel="noopener" href="http://theme-next.iissnan.com/getting-started.html">NexT</a></li>
+<li><a target="_blank" rel="noopener" href="https://sunhwee.com/posts/6e8839eb.html">Hexo+Github博客搭建完全教程</a></li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+
+        
+
+
+        
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%90%AD%E5%BB%BA"><span class="nav-number">1.</span> <span class="nav-text">搭建</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%89%E8%A3%85Git"><span class="nav-number">1.1.</span> <span class="nav-text">安装Git</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%89%E8%A3%85Node-js"><span class="nav-number">1.2.</span> <span class="nav-text">安装Node.js</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%89%E8%A3%85Hexo"><span class="nav-number">1.3.</span> <span class="nav-text">安装Hexo</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%9B%E5%BB%BAGithub-Page"><span class="nav-number">1.4.</span> <span class="nav-text">创建Github Page</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%B3%E8%81%94Hexo%E5%92%8CGitHub"><span class="nav-number">1.5.</span> <span class="nav-text">关联Hexo和GitHub</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%AE%9A%E5%88%B6"><span class="nav-number">2.</span> <span class="nav-text">定制</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8"><span class="nav-number">3.</span> <span class="nav-text">使用</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%8F%82%E8%80%83"><span class="nav-number">4.</span> <span class="nav-text">参考</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">cheqi</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">1</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">1</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa-thin fa-atom-simple"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">cheqi</span>
+</div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>
